@@ -30,7 +30,7 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic","Noto Sans JP",sans-serif;
   font-size:18px;line-height:1.8;overflow-wrap:anywhere}
-main{max-width:40rem;margin:0 auto;padding:1.5rem 16px 3rem}
+main{max-width:1000px;margin:0 auto;padding:1.5rem 24px 3rem}
 h1{font-size:1.5rem;line-height:1.5;margin:0 0 .4rem}
 h2{font-size:1.3rem;line-height:1.5;margin:0 0 .6rem}
 .part{font-size:1.25rem;font-weight:700;margin:2.2rem 0 .8rem;padding:.5rem .9rem;border-left:8px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0}
@@ -48,6 +48,11 @@ p{margin:.6rem 0}
 .card.ok .label{color:var(--ok)}.card.kraft .label{color:var(--kraft)}
 .menu{display:block;font-weight:700;background:var(--unknown-soft);border:1px solid var(--line);border-radius:8px;padding:.4rem .7rem;margin:.4rem 0}
 img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:10px;margin:.8rem auto 0}
+.split{display:flex;gap:1.5rem;align-items:flex-start}
+.split .text{flex:1 1 0;min-width:0}
+.split .shot{flex:0 0 420px;max-width:420px}
+.split .shot img{margin:0}
+@media (max-width:760px){.split{flex-direction:column}.split .shot{flex:none;max-width:100%;width:100%}}
 .copybox{font-size:1rem;background:var(--unknown-soft);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;margin:.5rem 0;line-height:1.7}
 button{font:inherit;font-weight:700;min-height:52px;width:100%;border-radius:14px;border:2px solid var(--accent);background:var(--accent);color:var(--on-accent);padding:.6rem 1rem;cursor:pointer;margin:.3rem 0}
 button:focus-visible,summary:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
@@ -92,19 +97,20 @@ footer{margin-top:2rem;color:var(--ink-2);font-size:.9rem;text-align:center}
 
 <section class="step">
   <span class="num">1</span>
+  <div class="split"><div class="text">
   <h2>商品ページを開いて、緑のボタンをおす</h2>
   <p>eBayの商品ページを開いた状態で、Chromeの右上から作成君を開きます。</p>
   <p>ホーム画面の次の緑のボタンをおします。</p>
   <span class="menu">⌚ AIでWatch Worksheetを作成する</span>
-  <img src="images/panel-home.png" alt="作成君のホーム画面。緑の「AIでWatch Worksheetを作成する」ボタンが見えます。">
+  </div><div class="shot"><img src="images/panel-home.png" alt="作成君のホーム画面。緑の「AIでWatch Worksheetを作成する」ボタンが見えます。"></div></div>
 </section>
 
 <section class="step">
   <span class="num">2</span>
+  <div class="split"><div class="text">
   <h2>項目が自動で入ります</h2>
   <p>型番、ムーブメント種別（時計を動かす仕組み）、表示種別、石数、バンド、ケースなどの欄に、内容が自動で入ります。</p>
   <p>入った内容は、各欄でその場で選び直したり、書き直したりできます。</p>
-  <img src="images/panel-edit.png" alt="AIが自動入力した後の入力画面。型番やムーブメント種別などの欄があり、バンド種類の欄に赤い警告が出ています。">
   <div class="card warn">
     <p><b>赤い警告が出た欄は、商品画像を見て自分で選びます。</b></p>
     <p>上の例では、バンドの素材がページから判別できなかったため、バンド種類の欄に赤い警告が出ています。</p>
@@ -112,15 +118,37 @@ footer{margin-top:2rem;color:var(--ink-2);font-size:.9rem;text-align:center}
   <div class="card info">
     <p>この例はクオーツの時計なので、「Jewels 石数」の欄は薄い表示になっていて、入力は不要です。</p>
   </div>
+  </div><div class="shot"><img src="images/panel-edit.png" alt="AIが自動入力した後の入力画面。型番やムーブメント種別などの欄があり、バンド種類の欄に赤い警告が出ています。"></div></div>
 </section>
 
 <section class="step">
   <span class="num">3</span>
-  <h2>下のボタンで先へ進む</h2>
-  <p>入力が終わったら、画面の一番下のボタンをおします。</p>
-  <span class="menu">確認ウィザードへ進む</span>
-  <p>AIで読み取ったあとは、次のボタンも出ます。内容に問題がなければ、こちらで印刷の画面へ直接進めます。</p>
-  <span class="menu">印刷プレビューへ直接進む</span>
+  <div class="split"><div class="text">
+  <h2>販売価格（税関申告価格）を入れる</h2>
+  <p>「価格」のところにある「販売価格」の欄に入れます。通貨は、必要なら横の欄で選びます。</p>
+  <p>その下の「HTSUS コード（10桁）」の欄には、コードが自動で入ります。空のときは、すぐ上の「候補コード」を見て10桁の数字で入れます（下の「HSコードは自動で決まります」の表と同じ番号です）。</p>
+  </div><div class="shot"><img src="images/panel-price.png" alt="入力画面の下の方。価格、通関用タイトル、AWB番号の欄と、緑と青の2つのボタンが見えます。"></div></div>
+</section>
+<section class="step">
+  <span class="num">4</span>
+  <h2>「タイトルを生成」をおす</h2>
+  <p>次のボタンをおします。</p>
+  <span class="menu">タイトルを生成</span>
+  <p>「通関用タイトル（自動生成）」の「Style name/No/Reference」の欄に、タイトルが入ります。手で直すこともできます。</p>
+</section>
+<section class="step">
+  <span class="num">5</span>
+  <h2>AWB番号を入れる（任意）</h2>
+  <p>「AWB Number（任意・後から手書きも可）」の欄に入れます。わからなければ、空のままでもかまいません。</p>
+</section>
+<section class="step">
+  <span class="num">6</span>
+  <h2>2つのボタンのどちらかをおす</h2>
+  <p>画面の一番下に、2つのボタンがあります。どちらをおしても大丈夫です。</p>
+  <span class="menu">印刷プレビューへ直接進む（緑）</span>
+  <p>このまま、PDFを作る画面まで進みます。確認の小さな窓が出たら「OK」をおします。このボタンは、AIで読み取ったときだけ出ます。</p>
+  <span class="menu">確認ウィザードへ進む（青）</span>
+  <p>各値を確認してから進めたいときは、こちらをおします。</p>
 </section>
 
 <div class="card kraft">
@@ -141,12 +169,14 @@ footer{margin-top:2rem;color:var(--ink-2);font-size:.9rem;text-align:center}
   <p>上にある2つのタブのうち、次のほうをおします。</p>
   <span class="menu">直接入力する</span>
   <p>AIで作るときと同じ入力欄が出ます。自分で入れていけば、同じように作れます。</p>
+  <p>入れ終わったあとは、2章の手順3〜5と同じ欄を入れて、「確認ウィザードへ進む」をおします。手で作るときは、緑の「印刷プレビューへ直接進む」ボタンは出ません。</p>
 </section>
 
 <div class="part">4. そのあとの手順</div>
 <section class="step">
   <span class="num">1</span>
   <h2>確認ウィザードで内容を確かめる</h2>
+  <p>2章の手順6で「確認ウィザードへ進む」をおした場合は、ここから進みます。「印刷プレビューへ直接進む」をおした場合は、次の「印刷 / PDF にする」へ進んでください。</p>
   <p>「確認ウィザード（Watch Worksheet）」（内容を順番に確かめる画面）の画面が開きます。ブロックごとに内容が並んでいます（全部で7つ）。見直して、直すところがあれば直し、次のボタンで進みます。</p>
   <span class="menu">次へ →</span>
   <p>最後のブロックまで来たら、次のボタンをおします。</p>
@@ -155,7 +185,7 @@ footer{margin-top:2rem;color:var(--ink-2);font-size:.9rem;text-align:center}
 <section class="step">
   <span class="num">2</span>
   <h2>印刷 / PDF にする</h2>
-  <p>「ワークシート確認（Watch Worksheet）」の画面が開きます。内容を見たら、次のボタンをおします。</p>
+  <p>「ワークシート確認（Watch Worksheet）」の画面が開きます。「印刷プレビューへ直接進む」をおした場合も、この画面になります。内容を見たら、次のボタンをおします。</p>
   <span class="menu">印刷 / PDFとして保存</span>
   <p>別のウィンドウが開きます。ブラウザの印刷の画面で「背景のグラフィック」をオンにすると、背景の色が正しく印刷されます。</p>
   <div class="card info">
