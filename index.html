@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="腕時計の Watch Worksheet を、Chrome拡張「HSコードワークシート作成君」で作る方法を説明します。">
+<title>腕時計のワークシートは作成君で</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#FAF9F6; --surface:#FFFFFF; --ink:#22272E; --ink-2:#5A6472;
+  --line:#E3E1DA; --accent:#2C55A6; --accent-soft:#EBF0FA; --on-accent:#fff;
+  --kraft:#8A6A3B; --kraft-soft:#F5EFE3;
+  --ok:#2E7D4F; --ok-soft:#E8F3EC;
+  --warn:#9A6A0A; --warn-soft:#FBF3DF;
+  --unknown-soft:#EEEFF1;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#171A1F; --surface:#1F242B; --ink:#E8EAED; --ink-2:#9AA4B0;
+    --line:#343B44; --accent:#7FA3E8; --accent-soft:#243248; --on-accent:#10151C;
+    --kraft:#C9A76A; --kraft-soft:#2E2820;
+    --ok:#7CC49A; --ok-soft:#20312A;
+    --warn:#D9B36A; --warn-soft:#332C1D;
+    --unknown-soft:#2A2E34;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:18px;line-height:1.8;overflow-wrap:anywhere}
+main{max-width:40rem;margin:0 auto;padding:1.5rem 16px 3rem}
+h1{font-size:1.5rem;line-height:1.5;margin:0 0 .4rem}
+h2{font-size:1.3rem;line-height:1.5;margin:0 0 .6rem}
+.part{font-size:1.25rem;font-weight:700;margin:2.2rem 0 .8rem;padding:.5rem .9rem;border-left:8px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0}
+p{margin:.6rem 0}
+.sub{color:var(--ink-2);margin:0}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.25rem 1rem;margin:1rem 0}
+.num{display:inline-flex;align-items:center;justify-content:center;width:3.2rem;height:3.2rem;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:1.8rem;font-weight:700;line-height:1;margin-bottom:.5rem}
+.card{border-radius:12px;padding:.9rem 1rem;margin:.75rem 0;border:1px solid var(--line);background:var(--surface)}
+.card.info{background:var(--accent-soft);border-color:var(--accent)}
+.card.ok{background:var(--ok-soft);border-color:var(--ok)}
+.card.warn{background:var(--warn-soft);border-color:var(--warn)}
+.card.kraft{background:var(--kraft-soft);border-color:var(--kraft)}
+.card p:first-child{margin-top:0}.card p:last-child{margin-bottom:0}
+.label{display:inline-block;font-size:.85rem;font-weight:700;border-radius:6px;padding:.05rem .6rem;border:1px solid currentColor}
+.card.ok .label{color:var(--ok)}.card.kraft .label{color:var(--kraft)}
+.menu{display:block;font-weight:700;background:var(--unknown-soft);border:1px solid var(--line);border-radius:8px;padding:.4rem .7rem;margin:.4rem 0}
+img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:10px;margin:.8rem auto 0}
+.copybox{font-size:1rem;background:var(--unknown-soft);border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;margin:.5rem 0;line-height:1.7}
+button{font:inherit;font-weight:700;min-height:52px;width:100%;border-radius:14px;border:2px solid var(--accent);background:var(--accent);color:var(--on-accent);padding:.6rem 1rem;cursor:pointer;margin:.3rem 0}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
+.msg{min-height:1.4em;font-size:.95rem;color:var(--ok);margin:.1rem 0}
+.msg.fail{color:var(--warn)}
+ul{padding-left:1.2em;margin:.4rem 0}
+li{margin:.3rem 0}
+table{width:100%;border-collapse:collapse;font-size:1rem;margin:.6rem 0}th,td{border:1px solid var(--line);padding:.5rem .6rem;text-align:left;vertical-align:top}th{background:var(--accent-soft)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.6rem 1rem;margin:.75rem 0}summary{font-weight:700;cursor:pointer;min-height:44px;display:flex;align-items:center}
+footer{margin-top:2rem;color:var(--ink-2);font-size:.9rem;text-align:center}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>腕時計のワークシートは作成君で</h1>
+  <p class="sub">米国向け発送の Watch Worksheet（腕時計の税関用シート）を、Chrome拡張「HSコードワークシート作成君」で作る方法です。</p>
+</header>
+
+<div class="part">はじめに</div>
+<div class="card warn">
+  <p><b>自分のAIに作らせると、止まりがちです。</b></p>
+  <p>ChatGPTなどに Watch Worksheet を作らせると、石数（Jewels）がわからないときに「推定」「未検証」「暫定」といった注意書きを入れてきて、作業が止まりがちです。</p>
+  <p>税関に出す書類には、こうした言葉は入れない方が安全です。</p>
+</div>
+<div class="card ok">
+  <p><b>作成君なら迷わず作れます。</b></p>
+  <p>項目が自動で入り、わからない欄の入れ方も決まっています。</p>
+</div>
+
+<div class="part">1. 作成君を入れる</div>
+<section class="step">
+  <span class="num">1</span>
+  <h2>一覧から追加する</h2>
+  <p>次のページを開きます。</p>
+  <div class="copybox"><a href="https://naokijodan.github.io/bulk-tools-guide/extensions.html">https://naokijodan.github.io/bulk-tools-guide/extensions.html</a></div>
+  <p>一覧の中から「HSコードワークシート作成君」を探して、次のボタンをおします。</p>
+  <span class="menu">Chromeに追加</span>
+</section>
+
+<div class="part">2. AIで作る</div>
+
+<section class="step">
+  <span class="num">1</span>
+  <h2>商品ページを開いて、緑のボタンをおす</h2>
+  <p>eBayの商品ページを開いた状態で、Chromeの右上から作成君を開きます。</p>
+  <p>ホーム画面の次の緑のボタンをおします。</p>
+  <span class="menu">⌚ AIでWatch Worksheetを作成する</span>
+  <img src="images/panel-home.png" alt="作成君のホーム画面。緑の「AIでWatch Worksheetを作成する」ボタンが見えます。">
+</section>
+
+<section class="step">
+  <span class="num">2</span>
+  <h2>項目が自動で入ります</h2>
+  <p>型番、ムーブメント種別（時計を動かす仕組み）、表示種別、石数、バンド、ケースなどの欄に、内容が自動で入ります。</p>
+  <p>入った内容は、各欄でその場で選び直したり、書き直したりできます。</p>
+  <img src="images/panel-edit.png" alt="AIが自動入力した後の入力画面。型番やムーブメント種別などの欄があり、バンド種類の欄に赤い警告が出ています。">
+  <div class="card warn">
+    <p><b>赤い警告が出た欄は、商品画像を見て自分で選びます。</b></p>
+    <p>上の例では、バンドの素材がページから判別できなかったため、バンド種類の欄に赤い警告が出ています。</p>
+  </div>
+  <div class="card info">
+    <p>この例はクオーツの時計なので、「Jewels 石数」の欄は薄い表示になっていて、入力は不要です。</p>
+  </div>
+</section>
+
+<section class="step">
+  <span class="num">3</span>
+  <h2>下のボタンで先へ進む</h2>
+  <p>入力が終わったら、画面の一番下のボタンをおします。</p>
+  <span class="menu">確認ウィザードへ進む</span>
+  <p>AIで読み取ったあとは、次のボタンも出ます。内容に問題がなければ、こちらで印刷の画面へ直接進めます。</p>
+  <span class="menu">印刷プレビューへ直接進む</span>
+</section>
+
+<div class="card kraft">
+  <span class="label">AIを使うために必要なもの</span>
+  <p>この機能は、ご自身の OpenAI APIキーが必要です。作成君の「⚙ 設定」を開き、「APIキー」の欄に入れて「保存」をおします。</p>
+</div>
+
+<div class="part">3. APIキーがない場合（手動で作る）</div>
+<section class="step">
+  <span class="num">1</span>
+  <h2>ホーム画面の下の方のリンクをおす</h2>
+  <p>ホーム画面を下へ動かすと、次のリンクがあります。</p>
+  <span class="menu">⌚ Watch Worksheetを手動で作成</span>
+</section>
+<section class="step">
+  <span class="num">2</span>
+  <h2>「直接入力する」を選んで入れる</h2>
+  <p>上にある2つのタブのうち、次のほうをおします。</p>
+  <span class="menu">直接入力する</span>
+  <p>AIで作るときと同じ入力欄が出ます。自分で入れていけば、同じように作れます。</p>
+</section>
+
+<div class="part">4. そのあとの手順</div>
+<section class="step">
+  <span class="num">1</span>
+  <h2>確認ウィザードで内容を確かめる</h2>
+  <p>「確認ウィザード（Watch Worksheet）」（内容を順番に確かめる画面）の画面が開きます。ブロックごとに内容が並んでいます（全部で7つ）。見直して、直すところがあれば直し、次のボタンで進みます。</p>
+  <span class="menu">次へ →</span>
+  <p>最後のブロックまで来たら、次のボタンをおします。</p>
+  <span class="menu">確認完了 ✓</span>
+</section>
+<section class="step">
+  <span class="num">2</span>
+  <h2>印刷 / PDF にする</h2>
+  <p>「ワークシート確認（Watch Worksheet）」の画面が開きます。内容を見たら、次のボタンをおします。</p>
+  <span class="menu">印刷 / PDFとして保存</span>
+  <p>別のウィンドウが開きます。ブラウザの印刷の画面で「背景のグラフィック」をオンにすると、背景の色が正しく印刷されます。</p>
+  <div class="card info">
+    <p>同じ画面の「＋ 時計を追加（最大5本）」で、時計を最大5本まで1枚にまとめられます。やり直したいときは「最初からやり直す」をおします。</p>
+  </div>
+</section>
+
+<div class="part">HSコードは自動で決まります</div>
+<p>HSコードは、税関で品物の種類をあらわす番号です。作成君は、次の3つの中から決めます。<b>石の数ではコードは変わりません。</b></p>
+<table>
+  <tr><th>時計のタイプ</th><th>HSコード</th></tr>
+  <tr><td>電池式（クオーツ・ソーラー）<br>ケースが貴金属でない</td><td><b>9102.21.5040</b></td></tr>
+  <tr><td>機械式（自動巻き・手巻き）<br>ケースが貴金属でない</td><td><b>9102.21.7010</b></td></tr>
+  <tr><td>機械式<br>ケースが貴金属</td><td><b>9102.11.9500</b></td></tr>
+</table>
+
+<div class="part">石数（Jewels）がわからないとき</div>
+
+<div class="card ok">
+  <span class="label">クオーツ・ソーラー</span>
+  <p><b>入力不要です。</b></p>
+  <p>作成君が「Not applicable for quartz」として扱います。</p>
+</div>
+
+<div class="card kraft">
+  <span class="label">機械式（自動巻き・手巻き）</span>
+  <p><b>空欄にしないでください。</b>次の順に探します。</p>
+  <ol>
+    <li>裏蓋やムーブメントの刻印を探す（例「21 JEWELS」）</li>
+    <li>刻印がなければ、似たモデルの数を入れる</li>
+    <li>それもわからなければ <b>17</b> を入れる</li>
+  </ol>
+</div>
+
+<div class="card info">
+  <p><b>AIが「確定できない」と言っても、止まらなくて大丈夫です。</b>この内容で進めてください。</p>
+</div>
+
+<footer>おわり</footer>
+</main>
+</body>
+</html>
